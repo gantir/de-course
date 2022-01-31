@@ -10,7 +10,10 @@
 3. [Snowplow Tracker Protocol](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/)
 
 #### GA to Bigquery
-1.[Raw Queries to BigQuery](https://stape.io/blog/how-to-export-google-universal-analytics-raw-data-to-bigquery)
+
+1. [GA BigQuery Export Schema](https://support.google.com/analytics/answer/3437719?hl=en)
+1. [Server Side Tracking](https://developers.google.com/tag-platform/tag-manager/server-side/intro)
+1. [Raw Queries to BigQuery](https://stape.io/blog/how-to-export-google-universal-analytics-raw-data-to-bigquery)
 
 #### Reference Links
 
