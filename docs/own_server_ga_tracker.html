@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <meta />
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  </head>
+  <body>
+    <h1 id="toc_0">Google Analytics plugin for sending hits in parallel to any server</h1>
+    <h2 id="toc_1">Deployment with Google Analytics</h2>
+    <p>Place the following lines along with Google Analytics code.</p>
+    <div>
+      <pre><code class="language-markup">&lt;script&gt;
+  // usual GA code
+
+  ga('create', 'UA-XXXXX-Y', 'auto')
+  ga('require', 'ownServerGaPlugin', { endpoint: '[[replace with endpoint where you want to send the hits]]' })
+  ga('send', 'pageView')
+&lt;/script&gt;
+&lt;script async src=&quot;[[replace with path to where you host the ga-plugin]]/ga-plugin.js&quot;&gt;&lt;/script&gt;</code></pre>
+    </div>
+    <h2 id="toc_2">Deployment with Google Tag Manager</h2>
+    <p>
+      Google Tag Manager does not currently support loading plugins when using
+      Google Analytics tag templates. A common workaround is to use a Custom
+      HTML tag to load the tracker with the plugin, but this has the unfortunate
+      consequence of requiring that <em>all</em> tags to which the plugin should
+      be applied use the same tracker name. This is difficult to do with Google
+      Tag Manager in a way that doesn't compromise data collection quality.
+    </p>
+    <p>
+      The best way to deploy this using Google Tag Manager is to replicate the
+      plugin functionality by overwriting the relevant task in the GA hit
+      builder task queue. But instead of modifying
+      <code>sendHitTask</code> directly, a safer way is to approach it via
+      <code>customTask</code>.
+    </p>
+    <h3 id="toc_3">1. Create a new Custom JavaScript variable</h3>
+    <p>
+      Create a new Custom JavaScript variable, and name it
+      <code>customTask - GA Hit duplicator</code>. Add the following code within:
+    </p>
+    <div>
+      <pre><code class="language-javascript">function() {
+  // Add your custom collector endpoint here
+  var endpoint = '[[replace with endpoint where you want to send the hits]]';
+
+  return function(model) {
+    var vendor = 'com.google.analytics';
+    var version = 'v1';
+    var path = ((endpoint.substr(-1) !== '/') ? endpoint + '/' : endpoint) + 'c';
+
+    var globalSendTaskName = '_' + model.get('trackingId') + '_sendHitTask';
+
+    var originalSendHitTask = window[globalSendTaskName] = window[globalSendTaskName] || model.get('sendHitTask');
+
+    model.set('sendHitTask', function(sendModel) {
+      var payload = sendModel.get('hitPayload');
+      originalSendHitTask(sendModel);
+
+      var request = new XMLHttpRequest();
+      request.open('POST', path, true);
+      request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+      payload += '&amp;vendor=' + vendor + '&amp;version=' + version;
+      request.send(payload);
+    });
+  };
+}</code></pre>
+    </div>
+    <p>
+      This stores a reference to the original <code>sendHitTask</code> in a
+      globally scoped variable (e.g.
+      <code>window['_UA-12345-1_sendHitTask']</code>) to avoid multiple runs of
+      this <code>customTask</code> from cascading on each other.
+    </p>
+    <h3 id="toc_4">
+      2. Add <code>customTask - GA Hit duplicator</code> to Google Analytics tags
+    </h3>
+    <p>
+      This variable must be added to every single Google Analytics tag in the
+      GTM container, whose hits you want to duplicate to your own server.
+    </p>
+    <p>
+      The best way to do this is to leverage the
+      <code>Google Analytics Settings</code> variable.
+    </p>
+    <ol>
+      <li>
+        <p>
+          Browse to
+          <code>Variables &gt; Google Analytics Settings</code> configurations,
+          expand it, and then expand <strong>Fields to set</strong>.
+        </p>
+      </li>
+      <li>
+        <p>Add a new field with:</p>
+        <ul>
+          <li><strong>Field name</strong>: customTask</li>
+          <li><strong>Value</strong>: {{customTask - GA Hit duplicator}}</li>
+        </ul>
+      </li>
+      <li><p>Publish the changes</p></li>
+    </ol>
+    <p>
+      All tags which have this field set will now send the Google Analytics
+      payload to the your own custom endpoint.
+    </p>
+  </body>
+</html>
