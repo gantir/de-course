@@ -24,6 +24,10 @@
 5. [Custom Task Guide](https://www.simoahava.com/analytics/customtask-the-guide/)
 6. [Snowplow GA Plugin](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin)
 
+### Data Processing
+
+* [Schema Repository](https://snowplowanalytics.com/blog/2014/07/01/iglu-schema-repository-released/)
+
 ### Presentations
 
 1. [Apache Beam](https://docs.google.com/presentation/d/1-LEvD8rKkM7i4SHenYe5G-KCD5o2cREwtLHOUEQfCWg/edit?usp=sharing)

@@ -1,0 +1,877 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Schema for Google Analytics streaming event model",
+  "self": {
+    "version": "1-0-0",
+    "vendor": "com.google.analytics",
+    "name": "streaming_hits",
+    "format": "jsonschema"
+  },
+  "type": "object",
+  "properties": {
+    "measurementId": {
+      "type": "string",
+      "nullable": false
+    },
+    "clientId": {
+      "type": "string",
+      "nullable": true
+    },
+    "userId": {
+      "type": "string",
+      "nullable": true
+    },
+    "networkUserId": {
+      "type": "string",
+      "nullable": true
+    },
+    "isInteraction": {
+      "type": "boolean",
+      "nullable": true
+    },
+    "hitType": {
+      "type": "string",
+      "allowed": [
+        "event",
+        "exception",
+        "item",
+        "pageview",
+        "screenview",
+        "social",
+        "timing",
+        "transaction"
+      ]
+    },
+    "hitId": {
+      "type": "string",
+      "nullable": false
+    },
+    "hitDataSource": {
+      "type": "string",
+      "nullable": true
+    },
+    "hitDate": {
+      "type": "string"
+    },
+    "hitHour": {
+      "type": "integer"
+    },
+    "hitMinute": {
+      "type": "integer"
+    },
+    "hitDatetime": {
+      "type": "date-time"
+    },
+    "hitTimestamp": {
+      "type": "number"
+    },
+    "hitDatetimeUtc": {
+      "type": "date-time"
+    },
+    "hitQueueTime": {
+      "type": "timestamp"
+    },
+    "sessionControl": {
+      "type": "string",
+      "nullable": true
+    },
+    "trafficSource": {
+      "type": "object",
+      "properties": {
+        "fullReferrer": {
+          "type": "string",
+          "nullable": true
+        },
+        "referralPath": {
+          "type": "string",
+          "nullable": true
+        },
+        "campaignCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "campaign": {
+          "type": "string",
+          "nullable": true
+        },
+        "source": {
+          "type": "string",
+          "nullable": true
+        },
+        "keyword": {
+          "type": "string",
+          "nullable": true
+        },
+        "medium": {
+          "type": "string",
+          "nullable": true
+        },
+        "adContent": {
+          "type": "string",
+          "nullable": true
+        },
+        "gclid": {
+          "type": "string",
+          "nullable": true
+        },
+        "dclid": {
+          "type": "string",
+          "nullable": true
+        },
+        "adNetwork": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "device": {
+      "type": "object",
+      "properties": {
+        "browser": {
+          "type": "string",
+          "nullable": true
+        },
+        "browserSize": {
+          "type": "string",
+          "nullable": true
+        },
+        "browserVersion": {
+          "type": "string",
+          "nullable": true
+        },
+        "deviceCategory": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileDeviceInfo": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileDeviceMarketingName": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileDeviceModel": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileInputSelector": {
+          "type": "string",
+          "nullable": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "nullable": true
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "nullable": true
+        },
+        "mobileDeviceBranding": {
+          "type": "string",
+          "nullable": true
+        },
+        "flashVersion": {
+          "type": "string",
+          "nullable": true
+        },
+        "javaEnabled": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "language": {
+          "type": "string",
+          "nullable": true
+        },
+        "screenColors": {
+          "type": "string",
+          "nullable": true
+        },
+        "screenResolution": {
+          "type": "string",
+          "nullable": true
+        },
+        "documentEncoding": {
+          "type": "string",
+          "nullable": true
+        },
+        "isBot": {
+          "type": "boolean",
+          "nullable": true
+        }
+      }
+    },
+    "geoNetwork": {
+      "type": "object",
+      "properties": {
+        "continent": {
+          "type": "string",
+          "nullable": true
+        },
+        "subContinent": {
+          "type": "string",
+          "nullable": true
+        },
+        "country": {
+          "type": "string",
+          "nullable": true
+        },
+        "region": {
+          "type": "string",
+          "nullable": true
+        },
+        "metro": {
+          "type": "string",
+          "nullable": true
+        },
+        "city": {
+          "type": "string",
+          "nullable": true
+        },
+        "cityId": {
+          "type": "string",
+          "nullable": true
+        },
+        "latitude": {
+          "type": "string",
+          "nullable": true
+        },
+        "longitude": {
+          "type": "string",
+          "nullable": true
+        },
+        "ip": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "customDimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "min": 1,
+            "type": "integer",
+            "max": 200
+          },
+          "value": {
+            "type": "string",
+            "maxlength": 150,
+            "nullable": true
+          }
+        }
+      }
+    },
+    "customMetrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "min": 1,
+            "type": "integer",
+            "max": 200
+          },
+          "value": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "customVariables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "min": 1,
+            "type": "integer",
+            "max": 200
+          },
+          "customVarName": {
+            "type": "string"
+          },
+          "customVarValue": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "contentGroups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "min": 1,
+            "type": "integer",
+            "max": 10
+          },
+          "value": {
+            "type": "string",
+            "maxlength": 100
+          }
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "pagePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "rawPagePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "rawQueryParams": {
+          "type": "string",
+          "nullable": true
+        },
+        "queryParams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "fragment": {
+          "type": "string",
+          "nullable": true
+        },
+        "pagePathLevel1": {
+          "type": "string",
+          "nullable": true
+        },
+        "pagePathLevel2": {
+          "type": "string",
+          "nullable": true
+        },
+        "pagePathLevel3": {
+          "type": "string",
+          "nullable": true
+        },
+        "pagePathLevel4": {
+          "type": "string",
+          "nullable": true
+        },
+        "hostname": {
+          "type": "string",
+          "nullable": true
+        },
+        "pageTitle": {
+          "type": "string",
+          "nullable": true
+        },
+        "searchKeyword": {
+          "type": "string",
+          "nullable": true
+        },
+        "searchCategory": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "referrer": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "nullable": true
+        },
+        "source": {
+          "type": "string",
+          "nullable": true
+        },
+        "medium": {
+          "type": "string",
+          "nullable": true
+        },
+        "pagePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "rawPagePath": {
+          "type": "string",
+          "nullable": true
+        },
+        "rawQueryParams": {
+          "type": "string",
+          "nullable": true
+        },
+        "searchParameter": {
+          "type": "string",
+          "nullable": true
+        },
+        "searchTerm": {
+          "type": "string",
+          "nullable": true
+        },
+        "queryParams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "fragment": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "product": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "isImpression": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isClick": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "customDimensions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "min": 1,
+                  "type": "integer",
+                  "max": 200
+                },
+                "value": {
+                  "type": "string",
+                  "maxlength": 150,
+                  "nullable": true
+                }
+              }
+            }
+          },
+          "customMetrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": {
+                  "min": 1,
+                  "type": "integer",
+                  "max": 200
+                },
+                "value": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "productListName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productListPosition": {
+            "type": "integer",
+            "nullable": true
+          },
+          "localProductPrice": {
+            "type": "integer",
+            "nullable": true
+          },
+          "localProductRefundAmount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "localProductRevenue": {
+            "type": "integer",
+            "nullable": true
+          },
+          "productBrand": {
+            "type": "string",
+            "nullable": true
+          },
+          "productPrice": {
+            "type": "integer",
+            "nullable": true
+          },
+          "productQuantity": {
+            "type": "integer",
+            "nullable": true
+          },
+          "productRefundAmount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "productRevenue": {
+            "type": "integer",
+            "nullable": true
+          },
+          "productSKU": {
+            "type": "string",
+            "nullable": true
+          },
+          "productVariant": {
+            "type": "string",
+            "nullable": true
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "couponCode": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "appInfo": {
+      "type": "object",
+      "properties": {
+        "appVersion": {
+          "type": "string",
+          "nullable": true
+        },
+        "appInstallerId": {
+          "type": "string",
+          "nullable": true
+        },
+        "appName": {
+          "type": "string",
+          "nullable": true
+        },
+        "appId": {
+          "type": "string",
+          "nullable": true
+        },
+        "screenName": {
+          "type": "string",
+          "nullable": true
+        },
+        "landingScreenName": {
+          "type": "string",
+          "nullable": true
+        },
+        "exitScreenName": {
+          "type": "string",
+          "nullable": true
+        },
+        "screenDepth": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "eventInfo": {
+      "type": "object",
+      "properties": {
+        "eventCategory": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventAction": {
+          "type": "string",
+          "nullable": true
+        },
+        "eventValue": {
+          "type": "integer",
+          "nullable": true
+        },
+        "eventLabel": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "exceptionInfo": {
+      "type": "object",
+      "properties": {
+        "isFatal": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "description": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "socialInteractionAction": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialInteractionNetwork": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialInteractionNetworkAction": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialInteractionTarget": {
+          "type": "string",
+          "nullable": true
+        },
+        "socialNetwork": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "eCommerceAction": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "nullable": true,
+          "allowed": [
+            "detail",
+            "click",
+            "add",
+            "remove",
+            "checkout",
+            "checkout_option",
+            "purchase",
+            "refund"
+          ]
+        },
+        "option": {
+          "type": "string",
+          "nullable": true
+        },
+        "step": {
+          "type": "integer",
+          "nullable": true
+        }
+      }
+    },
+    "experiment": {
+      "type": "object",
+      "properties": {
+        "experimentId": {
+          "type": "string",
+          "nullable": true
+        },
+        "experimentVariant": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "latencyTracking": {
+      "type": "object",
+      "properties": {
+        "domainLookupTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "domContentLoadedTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "domInteractiveTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "domLatencyMetricsSample": {
+          "type": "integer",
+          "nullable": true
+        },
+        "pageDownloadTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "pageLoadSample": {
+          "type": "integer",
+          "nullable": true
+        },
+        "pageLoadTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "redirectionTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "serverConnectionTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "serverResponseTime": {
+          "type": "integer",
+          "nullable": true
+        },
+        "speedMetricsSample": {
+          "type": "integer",
+          "nullable": true
+        },
+        "userTimingCategory": {
+          "type": "string",
+          "nullable": true
+        },
+        "userTimingLabel": {
+          "type": "string",
+          "nullable": true
+        },
+        "userTimingSample": {
+          "type": "integer",
+          "nullable": true
+        },
+        "userTimingValue": {
+          "type": "integer",
+          "nullable": true
+        },
+        "userTimingVariable": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string",
+          "nullable": true
+        },
+        "transactionRevenue": {
+          "type": "integer",
+          "nullable": true
+        },
+        "transactionTax": {
+          "type": "integer",
+          "nullable": true
+        },
+        "transactionShipping": {
+          "type": "integer",
+          "nullable": true
+        },
+        "affiliation": {
+          "type": "string",
+          "nullable": true
+        },
+        "currencyCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "localTransactionRevenue": {
+          "type": "integer",
+          "nullable": true
+        },
+        "localTransactionTax": {
+          "type": "integer",
+          "nullable": true
+        },
+        "localTransactionShipping": {
+          "type": "integer",
+          "nullable": true
+        },
+        "transactionCoupon": {
+          "type": "string",
+          "nullable": true
+        }
+      }
+    },
+    "promotion": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "promoPosition": {
+            "type": "string",
+            "nullable": true
+          },
+          "promoCreative": {
+            "type": "string",
+            "nullable": true
+          },
+          "promoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "promoName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    },
+    "promotionActionInfo": {
+      "type": "object",
+      "properties": {
+        "promoIsView": {
+          "type": "boolean",
+          "nullable": true
+        },
+        "promoIsClick": {
+          "type": "boolean",
+          "nullable": true
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "properties": {
+        "transactionId": {
+          "type": "string",
+          "nullable": true
+        },
+        "productName": {
+          "type": "string",
+          "nullable": true
+        },
+        "productCategory": {
+          "type": "string",
+          "nullable": true
+        },
+        "productSku": {
+          "type": "string",
+          "nullable": true
+        },
+        "itemQuantity": {
+          "type": "integer",
+          "nullable": true
+        },
+        "itemRevenue": {
+          "type": "integer",
+          "nullable": true
+        },
+        "currencyCode": {
+          "type": "string",
+          "nullable": true
+        },
+        "localItemRevenue": {
+          "type": "integer",
+          "nullable": true
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
